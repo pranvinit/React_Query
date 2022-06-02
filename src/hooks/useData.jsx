@@ -12,17 +12,13 @@ const fetchData = async (url) => {
 };
 
 export const useData = (entity, onSuccess, onError, enabled = false) => {
-  const { isLoading, isFetching, isError, error, data, refetch } = useQuery(
-    entity,
-    () => fetchData(GET_URL[entity]),
-    {
-      cacheTime: 1000 * 60 * 10, // 10 mins
-      staleTime: 1000 * 30, // 30 secs
-      enabled,
-      onSuccess,
-      onError,
-    }
-  );
+  const { ...attrs } = useQuery(entity, () => fetchData(GET_URL[entity]), {
+    cacheTime: 1000 * 60 * 10, // 10 mins
+    staleTime: 1000 * 30, // 30 secs
+    enabled,
+    onSuccess,
+    onError,
+  });
 
-  return { isLoading, isFetching, isError, error, data, refetch };
+  return { ...attrs };
 };

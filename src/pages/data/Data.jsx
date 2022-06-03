@@ -1,5 +1,5 @@
 import "./data.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useData } from "../../hooks/useData";
 
 export const Data = () => {
@@ -33,16 +33,22 @@ export const Data = () => {
       <h1>{entity} List</h1>
       <button onClick={refetch}>Fetch {entity}</button>
       <div className={`${entity}`}>
-        {data?.map((entity) => {
-          const keys = Object.keys(entity);
+        {data?.map((item) => {
+          const keys = Object.keys(item).slice(0, 2);
           return (
-            <div className="item">
-              {keys.map((key) => (
-                <span>
-                  {key}: {entity[key]}
-                </span>
-              ))}
-            </div>
+            <Link
+              key={item[keys[1]]}
+              className="entityLink"
+              to={`/${entity}/${item.id}`}
+            >
+              <div className="item">
+                {keys.map((key) => (
+                  <span key={key}>
+                    {key}: {item[key]}
+                  </span>
+                ))}
+              </div>
+            </Link>
           );
         })}
       </div>

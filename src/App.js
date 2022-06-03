@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // pages imports
 import Home from "./pages/home/Home";
 import { Data } from "./pages/data/Data";
+import { DataDetails } from "./pages/dataDetails/DataDetails";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="" element={<Home />} />
           <Route path=":entity" element={<Data />} />
+          <Route path=":entity/:id" element={<DataDetails />} />
         </Routes>
       </Router>
     </div>
